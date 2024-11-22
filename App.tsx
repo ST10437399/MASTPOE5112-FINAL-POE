@@ -1,20 +1,54 @@
+import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Mainpage from './screens/LoginPage';
+import ChefsMenu from './screens/ChefsMenu'; // Adjusted path
+import LoginPage from './screens/LoginPage';
+import Home from './screens/Home';
+import FullMenu from './screens/FullMenu';
+import Cart from './screens/Cart';
+import Reservation from './screens/Reservation';
+import { MenuProvider } from './screens/MenuContext';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <MenuProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="LoginPage"
+            component={LoginPage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ChefsMenu"
+            component={ChefsMenu}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="FullMenu"
+            component={FullMenu}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Cart"
+            component={Cart}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Reservation"
+            component={Reservation} // Updated name casing
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </MenuProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
